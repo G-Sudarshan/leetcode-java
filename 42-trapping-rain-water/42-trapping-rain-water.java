@@ -3,7 +3,7 @@ class Solution {
         int n = height.length;
         int[] right = new int[n];
         int[] left = new int[n];
-        int[] water = new int[n];
+        //int[] water = new int[n];
         int res = 0;
         
         left[0] = height[0];
@@ -18,12 +18,13 @@ class Solution {
         }
         
         for(int i=1; i<n-1; i++){
-            water[i] = Math.min(left[i], right[i]) - height[i];
+            //water[i] = 
+            res += Math.min(left[i], right[i]) - height[i];
         }
         
-        for(int i=0; i<n; i++){
-            res += water[i];
-        }
+        // for(int i=0; i<n; i++){
+        //     res += water[i];
+        // }
         
         return res;
         
