@@ -17,10 +17,10 @@ class Solution {
     public int getIdx(Node head, Node target){
         int counter = 0;
         while(head!=target){
-            counter++;
+             counter++;
              head = head.next;
         }
-       // counter++;
+
         return counter;
     }
     public Node copyRandomList(Node head) {
@@ -32,7 +32,7 @@ class Solution {
         
         Node temp = head;
         int idx= 0;
-        int counter = 0;
+
         
         while(temp != null){
             val.add(temp.val);
@@ -44,7 +44,7 @@ class Solution {
                 idx = getIdx(head, temp.random);
                 rd.add(idx);
             }
-            counter++;
+
             temp = temp.next;
         }
         
