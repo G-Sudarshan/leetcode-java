@@ -8,11 +8,7 @@ class Solution {
     
     public void combsum(int[] candidates, int target,List<Integer> list, int idx, List<List<Integer>> res){
         if( target == 0){
-             List<Integer> temp = new ArrayList<Integer>();
-             for(int x: list){
-                 temp.add(x);
-             }
-            res.add(temp);
+            res.add(new ArrayList<>(list));
             return;
         }
         
