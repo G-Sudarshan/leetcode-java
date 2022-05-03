@@ -1,7 +1,7 @@
 class Solution {
     public boolean isValid(String s) {
         if (s.length() % 2 != 0) {
-            return false;
+            return false; // odd length depicts that one barcket pair is incomplete
         }
         
         Stack<Character> stk = new Stack<>();
