@@ -52,7 +52,6 @@ class Solution
     public void delStack(Stack<Integer>s,int n, int k){
         if(n==k){
             s.pop();
-        }else if(n==0){
             return;
         }else{
           int temp = s.pop();
