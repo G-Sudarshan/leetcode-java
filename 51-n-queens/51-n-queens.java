@@ -19,6 +19,7 @@ class Solution {
                 t.add(new String(s));
             }
             res.add(t);
+            return;
         }
         
         for(int col=0; col<n; col++){
