@@ -1,88 +1,54 @@
 class Solution {
+     List<List<String>> res = new ArrayList<>();
      public List<List<String>> solveNQueens(int n) {
-        List<List<String>> result = new ArrayList<>();
-        
-        // Create n*n board and fill it with dots "."
         char[][] board = new char[n][n];
-        
-        for(char[] row : board) {
-            Arrays.fill(row, '.');
-        }
-        
-        // Call recursive function for 0th row
-        solveNQueens(board, n, 0, result);
-        
-        return result;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                board[i][j] = '.';
+            }
+        }       
+       solve(board, 0, n);
+       return res;
     }
     
-    private void solveNQueens(char[][] board, int n, int row, List<List<String>> result) {
-        /* If all the queens have been placed in current path, 
-        put the formatted result into list and backtrack. */
-        if( row == n ) {
-            result.add( formatResult( board ) );
+    public void solve(char[][] board, int row, int n){
+        if(row==n){
+            // save in result
+            List<String> t = new ArrayList<>();
+            for(char[] s: board){
+                t.add(new String(s));
+            }
+            res.add(t);
             return;
         }
         
-        /* Try to place the queen in each column of the current row */
-        for(int col=0; col<n; col++) {
-            
-            // Check current queen is safe at current column in the row
-            if( isSafe( board, n, row, col ) ) {
-                
-                // Place the queen at current column
+        for(int col=0; col<n; col++){
+            if(isValid(board, row, col)){
                 board[row][col] = 'Q';
-                
-                // Try to place the next queen in the row
-                solveNQueens(board, n, row+1, result);
-                
-                /* Remove the queen after the current combination has been 
-                tried */
+                solve(board, row+1, n);
                 board[row][col] = '.';
             }
         }
+        
     }
     
-    private boolean isSafe(char[][] board, int n, int row, int col) {
-
-        // Is column safe
-        for(int i=0; i<row; i++) {
-            if( board[i][col] == 'Q' ) {
+    public boolean isValid(char[][] board, int row, int col){
+        for(int i=row-1; i>=0; i--){
+            if(board[i][col] == 'Q')
                 return false;
-            }
         }
         
-        // Is main diagonal safe
-        int tempRow = row-1, tempCol = col-1;
-        
-        while( tempRow >= 0 && tempCol >= 0 ) {
-            
-            if( board[tempRow][tempCol] == 'Q' ) return false;
-
-            tempRow--;
-            tempCol--;
+        for(int i= row-1, j=col-1; i>=0 && j>=0; i--, j--){
+            if(board[i][j] == 'Q')
+                return false;
         }
         
-        // Is anti diagonal safe
-        tempRow = row-1; 
-        tempCol = col+1;
-        
-        while( tempRow >= 0 && tempCol < n ) {
-            
-            if( board[tempRow][tempCol] == 'Q' ) return false;
-            
-            tempRow--;
-            tempCol++;
+        for(int i=row-1, j=col+1; i>=0 && j<board.length; i--, j++){
+            if(board[i][j] == 'Q')
+                return false;
         }
-        
         return true;
     }
     
-    private List<String> formatResult(char[][] board) {
-        List<String> result = new ArrayList<>();
-        
-        for(char[] row : board) {
-            result.add( new String( row ) );
-        }
-        return result;
-    }
+    
 }
