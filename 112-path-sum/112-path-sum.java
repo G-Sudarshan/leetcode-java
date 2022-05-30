@@ -15,19 +15,20 @@
  */
 class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
-         //if root node is null
-        if(root==null){
-          return false;
+         if(root == null){
+            return false;
         }
         
-        // if the current node is a leaf and its value is equal to the sum, we've found a pat
-        if(root.val==targetSum && root.left==null && root.right==null){
-          return true;
+        
+        if(root.left == null && root.right == null){
+            if(targetSum - root.val == 0){
+                return true;
+            }else{
+                return false;
+            }
         }
         
-        // recursively call to traverse the left and right sub-tree
-        // return true if any of the two recursive call return tru
-        return (hasPathSum(root.left,targetSum-root.val)||hasPathSum(root.right,targetSum-root.val));
-        
+       
+        return hasPathSum(root.left, targetSum-root.val) || hasPathSum(root.right, targetSum-root.val);
     }
 }
